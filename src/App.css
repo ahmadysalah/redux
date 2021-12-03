@@ -1,20 +1,9 @@
-.App {
-  text-align: center;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
+
 .input-container{
-  width: 100%;
   display: flex;
+  justify-content: space-between;
 }
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+ 
 input{
   width: 70%;
    border-radius: 5px;

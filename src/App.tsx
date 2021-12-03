@@ -1,32 +1,45 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { toDoListConstants } from './redux/constants';
+import asyncStore from './redux/thunk';
 
 interface obj {
   [key: string]: any
 }
 function App() {
-  const [toDoList, setToDoList] = React.useState('');
+  const [toDoListInput, setToDoList] = React.useState('');
   const dispatch = useDispatch();
-  const list: obj = useSelector(state => state);
+  const { toDoList: { toDos } }: obj = useSelector(state => state);
+
+  useEffect(() => {
+    dispatch(asyncStore.getState());
+  }, [dispatch]);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(asyncStore?.ADD_TODO(toDoListInput));
+  }
+
   return (
     <div className="App">
       <h1>To Do List</h1>
-      <div className="input-container">
-        <input type="text" value={toDoList} onChange={(e) => setToDoList(e.target.value)} />
-        <button onClick={() => dispatch({ type: toDoListConstants.ADD_TODO, payload: toDoList })}>Add</button>
-      </div>
+      <form onSubmit={handleSubmit}>
+        <div className="input-container">
+          <input type="text" value={toDoListInput} onChange={(e) => setToDoList(e.target.value)} />
+          <button type='submit'>Add</button>
+        </div>
+      </form>
       <ul>
-        {list?.toDoList?.map((item: any, index: number) => (
+        {[...toDos]?.reverse().map((item: any, index: number) => (
           <li key={index}
             className='input-container'
           >
             <p
               onClick={() => dispatch({ type: toDoListConstants.TOGGLE_TODO, payload: index })}
-              style={{ textDecoration: item.isDone ? 'line-through' : 'none' }}
-            > {item.toDo} </p>
-            <button onClick={() => dispatch({ type: toDoListConstants.DELETE_TODO, payload: list?.toDoList?.[index] })}>Remove</button>
+              style={{ textDecoration: item.completed ? 'line-through' : 'none' }}
+            > {item.title} </p>
+            <button onClick={() => dispatch({ type: toDoListConstants.DELETE_TODO, payload: item.id })}>Remove</button>
           </li>
         ))}
       </ul>
