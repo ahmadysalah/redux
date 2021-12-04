@@ -2,9 +2,14 @@ import React from 'react'
 import { Checkbox } from 'semantic-ui-react'
 
 
-const CheckBoxComponent: React.FC<any> = ({title,onChange}) => {
+const CheckBoxComponent: React.FC<any> = ({ name, title, formik }) => {
     return (
-        <Checkbox label={title} onChange={(_:any,data:any)=>onChange(data.checked)} className='my-2'/>
+        <Checkbox name={name} label={title} onChange={
+            (e, { name, checked }) => {
+                formik.setFieldValue(name, checked)
+            }
+
+        } className='my-2' />
     );
 }
 export default CheckBoxComponent;
