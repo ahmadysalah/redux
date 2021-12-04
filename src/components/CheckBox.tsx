@@ -1,14 +1,10 @@
 import React from 'react'
+import { Checkbox } from 'semantic-ui-react'
 
-interface CheckBoxProps {
 
-}
-
-const CheckBox: React.FC<CheckBoxProps> = () => {
+const CheckBoxComponent: React.FC<any> = ({title,onChange}) => {
     return (
-        <div>
-            <input type="checkbox" />
-        </div>
+        <Checkbox label={title} onChange={(_:any,data:any)=>onChange(data.checked)} className='my-2'/>
     );
 }
-export default CheckBox;
+export default CheckBoxComponent;

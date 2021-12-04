@@ -36,6 +36,9 @@ button {
   font-weight: bold;
   background-color: #f1f1f1;
 }
+.salary{
+  margin-right: .5rem !important;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -67,3 +70,4 @@ button {
     transform: rotate(360deg);
   }
 }
+

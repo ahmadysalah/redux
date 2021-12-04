@@ -1,11 +1,11 @@
-import ReduxComponent from './pages/ReduxEx';
+// import ReduxComponent from './pages/ReduxEx';
 import Form from './pages/Form';
 
 
 function App() {
   return (
     <>
-      <ReduxComponent />
+      {/* <ReduxComponent /> */}
       <Form />
     </>
   );

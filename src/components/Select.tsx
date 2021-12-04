@@ -1,19 +1,22 @@
 import React from 'react'
+import { Select, } from 'semantic-ui-react'
 
-interface SelectProps {
 
-}
+const SelectComponent: React.FC<any> = ({placeholder,options,onChange,className,...props}) => {
+    const newOptions = options?.map((option:string) => ({
+        // key: option,
+        text: option,
+        value: option
+    }))
 
-const Select: React.FC<SelectProps> = () => {
     return (
-        <div>
-            <select>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-            </select>
-        </div>
+        <Select placeholder={placeholder}    
+         className={`w-100 my-2 ${className}`} 
+         options={newOptions} 
+         onChange={(_:any,data:any)=>onChange(data.value)}
+          {...props} 
+        />
     );
 }
 
-export default Select;
+export default SelectComponent;
